@@ -47,7 +47,7 @@ Build the documentation:
 
 Install:
 
-    cmake --install build --prefix /usr/local
+    sudo cmake --install build --prefix /usr/local
 
 ### License
 

@@ -28,22 +28,12 @@ Optional (for documentation):
 
 Get the code:
 
-    git clone https://github.com/wjwwood/serial.git
+    git clone git@github.com:norlab-ulaval/cpp_serial.git
 
 Build:
 
     cmake -S . -B build
     cmake --build build -j
-
-Build and run the tests (optional, requires GTest):
-
-    cmake -S . -B build -DBUILD_TESTING=ON
-    cmake --build build -j
-    ctest --test-dir build
-
-Build the documentation:
-
-    make doc
 
 Install:
 

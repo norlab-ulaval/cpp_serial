@@ -56,6 +56,13 @@ add_executable(serial_example examples/serial_example.cc)
 add_dependencies(serial_example ${PROJECT_NAME})
 target_link_libraries(serial_example ${PROJECT_NAME})
 
+## Additional simple sender/receiver examples
+add_executable(serial_sender examples/serial_sender.cc)
+target_link_libraries(serial_sender ${PROJECT_NAME})
+
+add_executable(serial_receiver examples/serial_receiver.cc)
+target_link_libraries(serial_receiver ${PROJECT_NAME})
+
 ## Install library
 install(TARGETS ${PROJECT_NAME}
     EXPORT ${PROJECT_NAME}Targets

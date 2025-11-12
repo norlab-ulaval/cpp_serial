@@ -28,16 +28,22 @@ Optional (for documentation):
 
 Get the code:
 
-    git clone git@github.com:norlab-ulaval/cpp_serial.git
+```
+git clone git@github.com:norlab-ulaval/cpp_serial.git
+```
 
 Build:
 
-    cmake -S . -B build
-    cmake --build build -j
+```
+cmake -S . -B build
+cmake --build build -j
+```
 
 Install:
 
-    sudo cmake --install build --prefix /usr/local
+```
+sudo cmake --install build --prefix /usr/local
+```
 
 ### License
 

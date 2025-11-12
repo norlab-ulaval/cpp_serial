@@ -63,6 +63,12 @@ target_link_libraries(serial_sender ${PROJECT_NAME})
 add_executable(serial_receiver examples/serial_receiver.cc)
 target_link_libraries(serial_receiver ${PROJECT_NAME})
 
+add_executable(ping_pong examples/ping_pong.cc)
+target_link_libraries(ping_pong ${PROJECT_NAME})
+
+add_executable(pong_ping examples/pong_ping.cc)
+target_link_libraries(pong_ping ${PROJECT_NAME})
+
 ## Install library
 install(TARGETS ${PROJECT_NAME}
     EXPORT ${PROJECT_NAME}Targets

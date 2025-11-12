@@ -27,7 +27,17 @@ int main(int argc, char** argv) {
     if (arg == "--lines") as_lines = true;
   }
 
-  serial::Serial ser(port, baud, serial::Timeout::simpleTimeout(500));
+  // Configure timeout based on mode:
+  // - Line mode: simpleTimeout with infinite inter-byte timeout works well
+  //   because readline() reads one byte at a time looking for delimiter
+  // - Raw mode: Must use finite inter-byte timeout (50ms) so that read()
+  //   returns with whatever data is available, rather than waiting for the
+  //   full buffer size (4096 bytes) which would never arrive
+  serial::Timeout timeout = as_lines 
+    ? serial::Timeout::simpleTimeout(500)
+    : serial::Timeout(50, 500, 0, 500, 0);  // 50ms inter-byte, 500ms total
+  
+  serial::Serial ser(port, baud, timeout);
   if (!ser.isOpen()) {
     std::cerr << "Failed to open port: " << port << "\n";
     return 2;
@@ -43,9 +53,11 @@ int main(int argc, char** argv) {
       }
     }
   } else {
-    std::vector<uint8_t> buf(4096);
+    std::vector<uint8_t> buf;
+    buf.reserve(4096);
     while (true) {
-      size_t n = ser.read(buf, buf.size());
+      buf.clear();  // Clear buffer before each read
+      size_t n = ser.read(buf, 4096);
       if (n > 0) {
         std::cout.write(reinterpret_cast<const char*>(buf.data()), static_cast<std::streamsize>(n));
         std::cout.flush();
